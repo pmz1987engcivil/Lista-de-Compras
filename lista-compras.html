@@ -1,378 +1,86 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>🛒 Lista de Compras</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
   :root {
-    --verde: #2ecc71;
-    --verde-escuro: #27ae60;
-    --fundo: #f0f4f0;
-    --card: #ffffff;
-    --texto: #1a2e1a;
-    --subtexto: #6b8c6b;
-    --risco: #a8d5a2;
-    --perigo: #e74c3c;
-    --sombra: 0 2px 12px rgba(46,204,113,0.10);
-    --radius: 16px;
+    --verde: #2ecc71; --verde-escuro: #27ae60;
+    --fundo: #f0f4f0; --card: #ffffff;
+    --texto: #1a2e1a; --subtexto: #6b8c6b;
+    --risco: #a8d5a2; --perigo: #e74c3c;
+    --sombra: 0 2px 12px rgba(46,204,113,0.10); --radius: 16px;
   }
-
-  body {
-    font-family: 'Nunito', sans-serif;
-    background: var(--fundo);
-    color: var(--texto);
-    min-height: 100vh;
-    padding-bottom: 120px;
-  }
-
-  /* HEADER */
-  header {
-    background: var(--verde);
-    padding: 18px 20px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(46,204,113,0.3);
-  }
-
-  header h1 {
-    font-size: 1.35rem;
-    font-weight: 900;
-    color: white;
-    letter-spacing: -0.3px;
-  }
-
+  body { font-family: 'Nunito', sans-serif; background: var(--fundo); color: var(--texto); min-height: 100vh; padding-bottom: 120px; }
+  header { background: var(--verde); padding: 18px 20px 14px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(46,204,113,0.3); }
+  header h1 { font-size: 1.35rem; font-weight: 900; color: white; }
   header h1 span { font-size: 1.5rem; }
-
-  .contador {
-    background: rgba(255,255,255,0.25);
-    color: white;
-    font-size: 0.8rem;
-    font-weight: 800;
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
-
-  /* INPUT */
-  .input-area {
-    padding: 16px;
-    background: white;
-    border-bottom: 2px solid var(--fundo);
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-
-  .input-area input {
-    flex: 1;
-    border: 2px solid #e0ece0;
-    border-radius: 12px;
-    padding: 12px 16px;
-    font-size: 1rem;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 600;
-    color: var(--texto);
-    background: var(--fundo);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .input-area input:focus {
-    border-color: var(--verde);
-    background: white;
-  }
-
+  .status { background: rgba(255,255,255,0.25); color: white; font-size: 0.78rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; display: flex; align-items: center; gap: 5px; }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: white; animation: piscar 1.5s infinite; }
+  @keyframes piscar { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .input-area { padding: 16px; background: white; border-bottom: 2px solid var(--fundo); display: flex; gap: 10px; align-items: center; }
+  .input-area input { flex: 1; border: 2px solid #e0ece0; border-radius: 12px; padding: 12px 16px; font-size: 1rem; font-family: 'Nunito', sans-serif; font-weight: 600; color: var(--texto); background: var(--fundo); outline: none; transition: border-color 0.2s; }
+  .input-area input:focus { border-color: var(--verde); background: white; }
   .input-area input::placeholder { color: #aac8aa; font-weight: 600; }
-
-  .btn-add {
-    background: var(--verde);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    width: 48px;
-    height: 48px;
-    font-size: 1.6rem;
-    font-weight: 900;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: transform 0.15s, background 0.15s;
-    line-height: 1;
-  }
-
+  .btn-add { background: var(--verde); color: white; border: none; border-radius: 12px; width: 48px; height: 48px; font-size: 1.6rem; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.15s, background 0.15s; }
   .btn-add:active { transform: scale(0.92); background: var(--verde-escuro); }
-
-  /* BARRA DE PROGRESSO */
-  .progresso-wrap {
-    padding: 12px 16px 4px;
-  }
-
-  .progresso-label {
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--subtexto);
-    margin-bottom: 6px;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .progresso-bar {
-    background: #d6ead6;
-    border-radius: 10px;
-    height: 8px;
-    overflow: hidden;
-  }
-
-  .progresso-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--verde), var(--verde-escuro));
-    border-radius: 10px;
-    transition: width 0.4s cubic-bezier(.4,2,.6,1);
-  }
-
-  /* LISTA */
-  .lista {
-    padding: 12px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .item {
-    background: var(--card);
-    border-radius: var(--radius);
-    display: flex;
-    align-items: center;
-    padding: 14px 14px 14px 10px;
-    box-shadow: var(--sombra);
-    border: 2px solid transparent;
-    transition: all 0.25s ease;
-    animation: entrar 0.25s ease;
-    gap: 10px;
-  }
-
-  @keyframes entrar {
-    from { opacity: 0; transform: translateY(-8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .item.comprado {
-    background: #f5fbf5;
-    border-color: #d6ead6;
-    opacity: 0.75;
-  }
-
-  .checkbox {
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    border: 2.5px solid #c0dcc0;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: all 0.2s;
-    font-size: 1rem;
-  }
-
-  .item.comprado .checkbox {
-    background: var(--verde);
-    border-color: var(--verde);
-    color: white;
-  }
-
-  .item-nome {
-    flex: 1;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--texto);
-    word-break: break-word;
-    transition: all 0.25s;
-    line-height: 1.3;
-  }
-
-  .item.comprado .item-nome {
-    text-decoration: line-through;
-    color: var(--risco);
-    font-weight: 600;
-  }
-
-  .qtd-ctrl {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-
-  .qtd-btn {
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    border: 2px solid #e0ece0;
-    background: var(--fundo);
-    font-size: 1.1rem;
-    font-weight: 900;
-    color: var(--subtexto);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s;
-    line-height: 1;
-    padding: 0;
-  }
-
+  .progresso-wrap { padding: 12px 16px 4px; }
+  .progresso-label { font-size: 0.78rem; font-weight: 700; color: var(--subtexto); margin-bottom: 6px; display: flex; justify-content: space-between; }
+  .progresso-bar { background: #d6ead6; border-radius: 10px; height: 8px; overflow: hidden; }
+  .progresso-fill { height: 100%; background: linear-gradient(90deg, var(--verde), var(--verde-escuro)); border-radius: 10px; transition: width 0.4s cubic-bezier(.4,2,.6,1); }
+  .lista { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
+  .item { background: var(--card); border-radius: var(--radius); display: flex; align-items: center; padding: 14px 14px 14px 10px; box-shadow: var(--sombra); border: 2px solid transparent; transition: all 0.25s ease; animation: entrar 0.25s ease; gap: 10px; }
+  @keyframes entrar { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+  .item.comprado { background: #f5fbf5; border-color: #d6ead6; opacity: 0.75; }
+  .checkbox { width: 28px; height: 28px; border-radius: 8px; border: 2.5px solid #c0dcc0; background: white; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all 0.2s; font-size: 1rem; }
+  .item.comprado .checkbox { background: var(--verde); border-color: var(--verde); color: white; }
+  .item-nome { flex: 1; font-size: 1rem; font-weight: 700; color: var(--texto); word-break: break-word; transition: all 0.25s; line-height: 1.3; }
+  .item.comprado .item-nome { text-decoration: line-through; color: var(--risco); font-weight: 600; }
+  .qtd-ctrl { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+  .qtd-btn { width: 28px; height: 28px; border-radius: 8px; border: 2px solid #e0ece0; background: var(--fundo); font-size: 1.1rem; font-weight: 900; color: var(--subtexto); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; line-height: 1; padding: 0; }
   .qtd-btn:active { background: var(--verde); color: white; border-color: var(--verde); }
-
-  .qtd-num {
-    font-size: 0.85rem;
-    font-weight: 800;
-    color: var(--subtexto);
-    min-width: 18px;
-    text-align: center;
-  }
-
-  .btn-del {
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-    border: none;
-    background: #fdecea;
-    color: var(--perigo);
-    font-size: 1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.15s;
-  }
-
+  .qtd-num { font-size: 0.85rem; font-weight: 800; color: var(--subtexto); min-width: 18px; text-align: center; }
+  .btn-del { width: 30px; height: 30px; border-radius: 8px; border: none; background: #fdecea; color: var(--perigo); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; }
   .btn-del:active { background: var(--perigo); color: white; }
-
-  /* VAZIO */
-  .vazio {
-    text-align: center;
-    padding: 48px 20px;
-    color: var(--subtexto);
-  }
-
+  .vazio { text-align: center; padding: 48px 20px; color: var(--subtexto); }
   .vazio .icone { font-size: 3.5rem; margin-bottom: 12px; }
   .vazio p { font-size: 1rem; font-weight: 700; }
   .vazio small { font-size: 0.85rem; font-weight: 600; opacity: 0.7; }
-
-  /* RODAPÉ COM AÇÕES */
-  .rodape {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: white;
-    padding: 12px 16px;
-    border-top: 2px solid var(--fundo);
-    display: flex;
-    gap: 10px;
-  }
-
-  .btn-limpar, .btn-limpar-comprados {
-    flex: 1;
-    padding: 13px;
-    border-radius: 12px;
-    border: none;
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 800;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-
-  .btn-limpar-comprados {
-    background: var(--fundo);
-    color: var(--subtexto);
-    border: 2px solid #d6ead6;
-  }
-
+  .rodape { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 12px 16px; border-top: 2px solid var(--fundo); display: flex; gap: 10px; }
+  .btn-limpar, .btn-limpar-comprados { flex: 1; padding: 13px; border-radius: 12px; border: none; font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 800; cursor: pointer; transition: all 0.15s; }
+  .btn-limpar-comprados { background: var(--fundo); color: var(--subtexto); border: 2px solid #d6ead6; }
   .btn-limpar-comprados:active { background: #e8f5e8; }
-
-  .btn-limpar {
-    background: #fdecea;
-    color: var(--perigo);
-    border: 2px solid #f5c6c2;
-  }
-
+  .btn-limpar { background: #fdecea; color: var(--perigo); border: 2px solid #f5c6c2; }
   .btn-limpar:active { background: var(--perigo); color: white; }
-
-  /* SEÇÃO "já comprado" */
-  .secao-titulo {
-    padding: 6px 16px 0;
-    font-size: 0.75rem;
-    font-weight: 800;
-    color: var(--subtexto);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  /* Toast */
-  .toast {
-    position: fixed;
-    top: 70px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-20px);
-    background: var(--texto);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 0.88rem;
-    font-weight: 700;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s;
-    z-index: 999;
-    white-space: nowrap;
-  }
-
-  .toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
+  .secao-titulo { padding: 6px 16px 0; font-size: 0.75rem; font-weight: 800; color: var(--subtexto); text-transform: uppercase; letter-spacing: 1px; }
+  .toast { position: fixed; top: 70px; left: 50%; transform: translateX(-50%) translateY(-20px); background: var(--texto); color: white; padding: 10px 20px; border-radius: 20px; font-size: 0.88rem; font-weight: 700; opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 999; white-space: nowrap; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .carregando { text-align: center; padding: 40px; color: var(--subtexto); font-weight: 700; }
 </style>
 </head>
 <body>
 
 <header>
   <h1><span>🛒</span> Lista de Compras</h1>
-  <div class="contador" id="contador">0 itens</div>
+  <div class="status"><div class="status-dot" id="statusDot"></div><span id="statusTxt">conectando...</span></div>
 </header>
 
 <div class="input-area">
   <input type="text" id="inputItem" placeholder="Adicionar item..." autocomplete="off" autocorrect="off" spellcheck="false">
-  <button class="btn-add" id="btnAdd" onclick="adicionarItem()">+</button>
+  <button class="btn-add" onclick="adicionarItem()">+</button>
 </div>
 
 <div class="progresso-wrap" id="progressoWrap" style="display:none">
-  <div class="progresso-label">
-    <span>Progresso</span>
-    <span id="progressoTexto">0 / 0</span>
-  </div>
-  <div class="progresso-bar">
-    <div class="progresso-fill" id="progressoFill" style="width:0%"></div>
-  </div>
+  <div class="progresso-label"><span>Progresso</span><span id="progressoTexto">0 / 0</span></div>
+  <div class="progresso-bar"><div class="progresso-fill" id="progressoFill" style="width:0%"></div></div>
 </div>
 
-<div id="app"></div>
+<div id="app"><div class="carregando">⏳ Conectando ao banco de dados...</div></div>
 
 <div class="rodape">
   <button class="btn-limpar-comprados" onclick="limparComprados()">✅ Remover comprados</button>
@@ -381,15 +89,43 @@
 
 <div class="toast" id="toast"></div>
 
-<script>
-  let lista = JSON.parse(localStorage.getItem('lista-compras') || '[]');
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, onValue, push, remove, update, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBG2bZYTBLcphUb1X0lYhJQJ8tLdMOJcwQ",
+    authDomain: "lista-compras-d629a.firebaseapp.com",
+    databaseURL: "https://lista-compras-d629a-default-rtdb.firebaseio.com",
+    projectId: "lista-compras-d629a",
+    storageBucket: "lista-compras-d629a.firebasestorage.app",
+    messagingSenderId: "814279729568",
+    appId: "1:814279729568:web:f68ffa035819159d21c4c5"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const listaRef = ref(db, 'lista');
 
   const input = document.getElementById('inputItem');
   input.addEventListener('keydown', e => { if (e.key === 'Enter') adicionarItem(); });
 
-  function salvar() {
-    localStorage.setItem('lista-compras', JSON.stringify(lista));
-  }
+  // Status de conexão
+  import { ref as dbRef, onValue as dbOnValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+  const connRef = dbRef(db, '.info/connected');
+  dbOnValue(connRef, snap => {
+    const dot = document.getElementById('statusDot');
+    const txt = document.getElementById('statusTxt');
+    if (snap.val()) {
+      dot.style.background = 'white';
+      dot.style.animation = 'piscar 1.5s infinite';
+      txt.textContent = 'ao vivo';
+    } else {
+      dot.style.background = '#f39c12';
+      dot.style.animation = 'none';
+      txt.textContent = 'sem conexão';
+    }
+  });
 
   function toast(msg) {
     const el = document.getElementById('toast');
@@ -398,125 +134,104 @@
     setTimeout(() => el.classList.remove('show'), 1800);
   }
 
-  function adicionarItem() {
+  window.adicionarItem = function() {
     const nome = input.value.trim();
     if (!nome) return;
-    lista.unshift({ id: Date.now(), nome, qtd: 1, comprado: false });
+    push(listaRef, { nome, qtd: 1, comprado: false, ts: Date.now() });
     input.value = '';
     input.focus();
-    salvar();
-    renderizar();
     toast('Item adicionado!');
   }
 
-  function toggleItem(id) {
-    const item = lista.find(i => i.id === id);
-    if (item) item.comprado = !item.comprado;
-    salvar();
-    renderizar();
+  window.toggleItem = function(id, comprado) {
+    update(ref(db, 'lista/' + id), { comprado: !comprado });
   }
 
-  function removerItem(id) {
-    lista = lista.filter(i => i.id !== id);
-    salvar();
-    renderizar();
+  window.removerItem = function(id) {
+    remove(ref(db, 'lista/' + id));
   }
 
-  function alterarQtd(id, delta) {
-    const item = lista.find(i => i.id === id);
-    if (!item) return;
-    item.qtd = Math.max(1, (item.qtd || 1) + delta);
-    salvar();
-    renderizar();
+  window.alterarQtd = function(id, delta, qtdAtual) {
+    const nova = Math.max(1, qtdAtual + delta);
+    update(ref(db, 'lista/' + id), { qtd: nova });
   }
 
-  function limparComprados() {
-    const antes = lista.length;
-    lista = lista.filter(i => !i.comprado);
-    const removidos = antes - lista.length;
-    if (removidos === 0) { toast('Nenhum item comprado ainda'); return; }
-    salvar();
-    renderizar();
-    toast(`${removidos} item(ns) removido(s)`);
+  window.limparComprados = function() {
+    get(listaRef).then(snap => {
+      if (!snap.exists()) { toast('Nenhum item comprado'); return; }
+      let count = 0;
+      snap.forEach(child => {
+        if (child.val().comprado) { remove(ref(db, 'lista/' + child.key)); count++; }
+      });
+      if (count === 0) toast('Nenhum item comprado ainda');
+      else toast(count + ' item(ns) removido(s)');
+    });
   }
 
-  function limparTudo() {
-    if (lista.length === 0) { toast('A lista já está vazia'); return; }
-    if (!confirm('Limpar toda a lista?')) return;
-    lista = [];
-    salvar();
-    renderizar();
-    toast('Lista limpa!');
+  window.limparTudo = function() {
+    get(listaRef).then(snap => {
+      if (!snap.exists()) { toast('A lista já está vazia'); return; }
+      if (!confirm('Limpar toda a lista?')) return;
+      remove(listaRef);
+      toast('Lista limpa!');
+    });
   }
 
-  function renderizar() {
+  function escapeHtml(str) {
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // Escuta mudanças em tempo real
+  onValue(listaRef, snap => {
     const app = document.getElementById('app');
-    const pendentes = lista.filter(i => !i.comprado);
-    const comprados = lista.filter(i => i.comprado);
-    const total = lista.length;
-    const totalComprados = comprados.length;
-
-    // Contador
-    document.getElementById('contador').textContent =
-      total === 0 ? '0 itens' : `${total} item${total !== 1 ? 's' : ''}`;
-
-    // Progresso
     const pw = document.getElementById('progressoWrap');
-    if (total > 0) {
-      pw.style.display = 'block';
-      document.getElementById('progressoTexto').textContent = `${totalComprados} / ${total}`;
-      document.getElementById('progressoFill').style.width = `${Math.round(totalComprados / total * 100)}%`;
-    } else {
-      pw.style.display = 'none';
-    }
 
-    if (total === 0) {
-      app.innerHTML = `
-        <div class="vazio">
-          <div class="icone">🛍️</div>
-          <p>Lista vazia</p>
-          <small>Adicione itens acima</small>
-        </div>`;
+    if (!snap.exists()) {
+      pw.style.display = 'none';
+      app.innerHTML = `<div class="vazio"><div class="icone">🛍️</div><p>Lista vazia</p><small>Adicione itens acima</small></div>`;
       return;
     }
 
-    let html = '';
+    const itens = [];
+    snap.forEach(child => itens.push({ id: child.key, ...child.val() }));
+    itens.sort((a, b) => (a.ts || 0) - (b.ts || 0));
 
+    const pendentes = itens.filter(i => !i.comprado);
+    const comprados = itens.filter(i => i.comprado);
+    const total = itens.length;
+    const totalComprados = comprados.length;
+
+    pw.style.display = 'block';
+    document.getElementById('progressoTexto').textContent = `${totalComprados} / ${total}`;
+    document.getElementById('progressoFill').style.width = `${Math.round(totalComprados / total * 100)}%`;
+
+    let html = '';
     if (pendentes.length > 0) {
       html += `<div class="secao-titulo">A comprar (${pendentes.length})</div><div class="lista">`;
       pendentes.forEach(item => { html += renderItem(item); });
       html += '</div>';
     }
-
     if (comprados.length > 0) {
       html += `<div class="secao-titulo" style="margin-top:8px">Já comprado (${comprados.length})</div><div class="lista">`;
       comprados.forEach(item => { html += renderItem(item); });
       html += '</div>';
     }
-
     app.innerHTML = html;
-  }
+  });
 
   function renderItem(item) {
-    const check = item.comprado ? '✓' : '';
     return `
-      <div class="item${item.comprado ? ' comprado' : ''}" id="item-${item.id}">
-        <div class="checkbox" onclick="toggleItem(${item.id})">${check}</div>
+      <div class="item${item.comprado ? ' comprado' : ''}">
+        <div class="checkbox" onclick="toggleItem('${item.id}', ${item.comprado})">${item.comprado ? '✓' : ''}</div>
         <div class="item-nome">${escapeHtml(item.nome)}</div>
         <div class="qtd-ctrl">
-          <button class="qtd-btn" onclick="alterarQtd(${item.id}, -1)">−</button>
-          <span class="qtd-num">${item.qtd}x</span>
-          <button class="qtd-btn" onclick="alterarQtd(${item.id}, 1)">+</button>
+          <button class="qtd-btn" onclick="alterarQtd('${item.id}', -1, ${item.qtd || 1})">−</button>
+          <span class="qtd-num">${item.qtd || 1}x</span>
+          <button class="qtd-btn" onclick="alterarQtd('${item.id}', 1, ${item.qtd || 1})">+</button>
         </div>
-        <button class="btn-del" onclick="removerItem(${item.id})">✕</button>
+        <button class="btn-del" onclick="removerItem('${item.id}')">✕</button>
       </div>`;
   }
-
-  function escapeHtml(str) {
-    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  renderizar();
 </script>
 </body>
 </html>
