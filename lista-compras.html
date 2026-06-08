@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -21,8 +20,7 @@
   header h1 { font-size: 1.35rem; font-weight: 900; color: white; }
   header h1 span { font-size: 1.5rem; }
   .status { background: rgba(255,255,255,0.25); color: white; font-size: 0.78rem; font-weight: 800; padding: 4px 10px; border-radius: 20px; display: flex; align-items: center; gap: 5px; }
-  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: white; animation: piscar 1.5s infinite; }
-  @keyframes piscar { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: white; }
   .input-area { padding: 16px; background: white; border-bottom: 2px solid var(--fundo); display: flex; gap: 10px; align-items: center; }
   .input-area input { flex: 1; border: 2px solid #e0ece0; border-radius: 12px; padding: 12px 16px; font-size: 1rem; font-family: 'Nunito', sans-serif; font-weight: 600; color: var(--texto); background: var(--fundo); outline: none; transition: border-color 0.2s; }
   .input-area input:focus { border-color: var(--verde); background: white; }
@@ -34,27 +32,25 @@
   .progresso-bar { background: #d6ead6; border-radius: 10px; height: 8px; overflow: hidden; }
   .progresso-fill { height: 100%; background: linear-gradient(90deg, var(--verde), var(--verde-escuro)); border-radius: 10px; transition: width 0.4s cubic-bezier(.4,2,.6,1); }
   .lista { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
-  .item { background: var(--card); border-radius: var(--radius); display: flex; align-items: center; padding: 14px 14px 14px 10px; box-shadow: var(--sombra); border: 2px solid transparent; transition: all 0.25s ease; animation: entrar 0.25s ease; gap: 10px; }
-  @keyframes entrar { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+  .item { background: var(--card); border-radius: var(--radius); display: flex; align-items: center; padding: 14px 14px 14px 10px; box-shadow: var(--sombra); border: 2px solid transparent; gap: 10px; }
   .item.comprado { background: #f5fbf5; border-color: #d6ead6; opacity: 0.75; }
-  .checkbox { width: 28px; height: 28px; border-radius: 8px; border: 2.5px solid #c0dcc0; background: white; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all 0.2s; font-size: 1rem; }
+  .checkbox { width: 28px; height: 28px; border-radius: 8px; border: 2.5px solid #c0dcc0; background: white; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; font-size: 1rem; }
   .item.comprado .checkbox { background: var(--verde); border-color: var(--verde); color: white; }
-  .item-nome { flex: 1; font-size: 1rem; font-weight: 700; color: var(--texto); word-break: break-word; transition: all 0.25s; line-height: 1.3; }
+  .item-nome { flex: 1; font-size: 1rem; font-weight: 700; color: var(--texto); word-break: break-word; line-height: 1.3; }
   .item.comprado .item-nome { text-decoration: line-through; color: var(--risco); font-weight: 600; }
   .qtd-ctrl { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-  .qtd-btn { width: 28px; height: 28px; border-radius: 8px; border: 2px solid #e0ece0; background: var(--fundo); font-size: 1.1rem; font-weight: 900; color: var(--subtexto); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; line-height: 1; padding: 0; }
+  .qtd-btn { width: 28px; height: 28px; border-radius: 8px; border: 2px solid #e0ece0; background: var(--fundo); font-size: 1.1rem; font-weight: 900; color: var(--subtexto); cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; }
   .qtd-btn:active { background: var(--verde); color: white; border-color: var(--verde); }
   .qtd-num { font-size: 0.85rem; font-weight: 800; color: var(--subtexto); min-width: 18px; text-align: center; }
-  .btn-del { width: 30px; height: 30px; border-radius: 8px; border: none; background: #fdecea; color: var(--perigo); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; }
+  .btn-del { width: 30px; height: 30px; border-radius: 8px; border: none; background: #fdecea; color: var(--perigo); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .btn-del:active { background: var(--perigo); color: white; }
   .vazio { text-align: center; padding: 48px 20px; color: var(--subtexto); }
   .vazio .icone { font-size: 3.5rem; margin-bottom: 12px; }
   .vazio p { font-size: 1rem; font-weight: 700; }
   .vazio small { font-size: 0.85rem; font-weight: 600; opacity: 0.7; }
   .rodape { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 12px 16px; border-top: 2px solid var(--fundo); display: flex; gap: 10px; }
-  .btn-limpar, .btn-limpar-comprados { flex: 1; padding: 13px; border-radius: 12px; border: none; font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 800; cursor: pointer; transition: all 0.15s; }
+  .btn-limpar, .btn-limpar-comprados { flex: 1; padding: 13px; border-radius: 12px; border: none; font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 800; cursor: pointer; }
   .btn-limpar-comprados { background: var(--fundo); color: var(--subtexto); border: 2px solid #d6ead6; }
-  .btn-limpar-comprados:active { background: #e8f5e8; }
   .btn-limpar { background: #fdecea; color: var(--perigo); border: 2px solid #f5c6c2; }
   .btn-limpar:active { background: var(--perigo); color: white; }
   .secao-titulo { padding: 6px 16px 0; font-size: 0.75rem; font-weight: 800; color: var(--subtexto); text-transform: uppercase; letter-spacing: 1px; }
@@ -72,7 +68,7 @@
 
 <div class="input-area">
   <input type="text" id="inputItem" placeholder="Adicionar item..." autocomplete="off" autocorrect="off" spellcheck="false">
-  <button class="btn-add" onclick="adicionarItem()">+</button>
+  <button class="btn-add" id="btnAdd">+</button>
 </div>
 
 <div class="progresso-wrap" id="progressoWrap" style="display:none">
@@ -80,19 +76,18 @@
   <div class="progresso-bar"><div class="progresso-fill" id="progressoFill" style="width:0%"></div></div>
 </div>
 
-<div id="app"><div class="carregando">⏳ Conectando ao banco de dados...</div></div>
+<div id="app"><div class="carregando">⏳ Conectando...</div></div>
 
 <div class="rodape">
-  <button class="btn-limpar-comprados" onclick="limparComprados()">✅ Remover comprados</button>
-  <button class="btn-limpar" onclick="limparTudo()">🗑 Limpar tudo</button>
+  <button class="btn-limpar-comprados" id="btnRemoverComprados">✅ Remover comprados</button>
+  <button class="btn-limpar" id="btnLimparTudo">🗑 Limpar tudo</button>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getDatabase, ref, onValue, push, remove, update, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+<script>
   const firebaseConfig = {
     apiKey: "AIzaSyBG2bZYTBLcphUb1X0lYhJQJ8tLdMOJcwQ",
     authDomain: "lista-compras-d629a.firebaseapp.com",
@@ -103,26 +98,19 @@
     appId: "1:814279729568:web:f68ffa035819159d21c4c5"
   };
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-  const listaRef = ref(db, 'lista');
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  const listaRef = db.ref('lista');
 
-  const input = document.getElementById('inputItem');
-  input.addEventListener('keydown', e => { if (e.key === 'Enter') adicionarItem(); });
-
-  // Status de conexão
-  import { ref as dbRef, onValue as dbOnValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-  const connRef = dbRef(db, '.info/connected');
-  dbOnValue(connRef, snap => {
+  // Status conexão
+  db.ref('.info/connected').on('value', snap => {
     const dot = document.getElementById('statusDot');
     const txt = document.getElementById('statusTxt');
     if (snap.val()) {
       dot.style.background = 'white';
-      dot.style.animation = 'piscar 1.5s infinite';
       txt.textContent = 'ao vivo';
     } else {
       dot.style.background = '#f39c12';
-      dot.style.animation = 'none';
       txt.textContent = 'sem conexão';
     }
   });
@@ -134,104 +122,132 @@
     setTimeout(() => el.classList.remove('show'), 1800);
   }
 
-  window.adicionarItem = function() {
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+
+  // Adicionar item
+  function adicionarItem() {
+    const input = document.getElementById('inputItem');
     const nome = input.value.trim();
     if (!nome) return;
-    push(listaRef, { nome, qtd: 1, comprado: false, ts: Date.now() });
+    listaRef.push({ nome: nome, qtd: 1, comprado: false, ts: Date.now() });
     input.value = '';
     input.focus();
     toast('Item adicionado!');
   }
 
-  window.toggleItem = function(id, comprado) {
-    update(ref(db, 'lista/' + id), { comprado: !comprado });
+  document.getElementById('btnAdd').addEventListener('click', adicionarItem);
+  document.getElementById('inputItem').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') adicionarItem();
+  });
+
+  // Escuta mudanças em tempo real
+  listaRef.on('value', function(snap) {
+    var appDiv = document.getElementById('app');
+    var pw = document.getElementById('progressoWrap');
+
+    if (!snap.exists()) {
+      pw.style.display = 'none';
+      appDiv.innerHTML = '<div class="vazio"><div class="icone">🛍️</div><p>Lista vazia</p><small>Adicione itens acima</small></div>';
+      return;
+    }
+
+    var itens = [];
+    snap.forEach(function(child) {
+      var val = child.val();
+      itens.push({
+        id: child.key,
+        nome: val.nome || '',
+        qtd: val.qtd || 1,
+        comprado: val.comprado || false,
+        ts: val.ts || 0
+      });
+    });
+
+    itens.sort(function(a, b) { return a.ts - b.ts; });
+
+    var pendentes = itens.filter(function(i) { return !i.comprado; });
+    var comprados = itens.filter(function(i) { return i.comprado; });
+    var total = itens.length;
+    var totalComprados = comprados.length;
+
+    pw.style.display = 'block';
+    document.getElementById('progressoTexto').textContent = totalComprados + ' / ' + total;
+    document.getElementById('progressoFill').style.width = Math.round(totalComprados / total * 100) + '%';
+
+    var html = '';
+
+    if (pendentes.length > 0) {
+      html += '<div class="secao-titulo">A comprar (' + pendentes.length + ')</div><div class="lista">';
+      pendentes.forEach(function(item) { html += renderItem(item); });
+      html += '</div>';
+    }
+
+    if (comprados.length > 0) {
+      html += '<div class="secao-titulo" style="margin-top:8px">Já comprado (' + comprados.length + ')</div><div class="lista">';
+      comprados.forEach(function(item) { html += renderItem(item); });
+      html += '</div>';
+    }
+
+    appDiv.innerHTML = html;
+  });
+
+  function renderItem(item) {
+    var check = item.comprado ? '✓' : '';
+    var compradoClass = item.comprado ? ' comprado' : '';
+    return '<div class="item' + compradoClass + '">' +
+      '<div class="checkbox" onclick="toggleItem(\'' + item.id + '\', ' + item.comprado + ')">' + check + '</div>' +
+      '<div class="item-nome">' + escapeHtml(item.nome) + '</div>' +
+      '<div class="qtd-ctrl">' +
+        '<button class="qtd-btn" onclick="alterarQtd(\'' + item.id + '\', -1, ' + item.qtd + ')">−</button>' +
+        '<span class="qtd-num">' + item.qtd + 'x</span>' +
+        '<button class="qtd-btn" onclick="alterarQtd(\'' + item.id + '\', 1, ' + item.qtd + ')">+</button>' +
+      '</div>' +
+      '<button class="btn-del" onclick="removerItem(\'' + item.id + '\')">✕</button>' +
+    '</div>';
   }
 
-  window.removerItem = function(id) {
-    remove(ref(db, 'lista/' + id));
+  function toggleItem(id, comprado) {
+    db.ref('lista/' + id).update({ comprado: !comprado });
   }
 
-  window.alterarQtd = function(id, delta, qtdAtual) {
-    const nova = Math.max(1, qtdAtual + delta);
-    update(ref(db, 'lista/' + id), { qtd: nova });
+  function removerItem(id) {
+    db.ref('lista/' + id).remove();
   }
 
-  window.limparComprados = function() {
-    get(listaRef).then(snap => {
+  function alterarQtd(id, delta, qtdAtual) {
+    var nova = Math.max(1, qtdAtual + delta);
+    db.ref('lista/' + id).update({ qtd: nova });
+  }
+
+  document.getElementById('btnRemoverComprados').addEventListener('click', function() {
+    listaRef.once('value', function(snap) {
       if (!snap.exists()) { toast('Nenhum item comprado'); return; }
-      let count = 0;
-      snap.forEach(child => {
-        if (child.val().comprado) { remove(ref(db, 'lista/' + child.key)); count++; }
+      var count = 0;
+      snap.forEach(function(child) {
+        if (child.val().comprado) {
+          db.ref('lista/' + child.key).remove();
+          count++;
+        }
       });
       if (count === 0) toast('Nenhum item comprado ainda');
       else toast(count + ' item(ns) removido(s)');
     });
-  }
-
-  window.limparTudo = function() {
-    get(listaRef).then(snap => {
-      if (!snap.exists()) { toast('A lista já está vazia'); return; }
-      if (!confirm('Limpar toda a lista?')) return;
-      remove(listaRef);
-      toast('Lista limpa!');
-    });
-  }
-
-  function escapeHtml(str) {
-    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  // Escuta mudanças em tempo real
-  onValue(listaRef, snap => {
-    const app = document.getElementById('app');
-    const pw = document.getElementById('progressoWrap');
-
-    if (!snap.exists()) {
-      pw.style.display = 'none';
-      app.innerHTML = `<div class="vazio"><div class="icone">🛍️</div><p>Lista vazia</p><small>Adicione itens acima</small></div>`;
-      return;
-    }
-
-    const itens = [];
-    snap.forEach(child => itens.push({ id: child.key, ...child.val() }));
-    itens.sort((a, b) => (a.ts || 0) - (b.ts || 0));
-
-    const pendentes = itens.filter(i => !i.comprado);
-    const comprados = itens.filter(i => i.comprado);
-    const total = itens.length;
-    const totalComprados = comprados.length;
-
-    pw.style.display = 'block';
-    document.getElementById('progressoTexto').textContent = `${totalComprados} / ${total}`;
-    document.getElementById('progressoFill').style.width = `${Math.round(totalComprados / total * 100)}%`;
-
-    let html = '';
-    if (pendentes.length > 0) {
-      html += `<div class="secao-titulo">A comprar (${pendentes.length})</div><div class="lista">`;
-      pendentes.forEach(item => { html += renderItem(item); });
-      html += '</div>';
-    }
-    if (comprados.length > 0) {
-      html += `<div class="secao-titulo" style="margin-top:8px">Já comprado (${comprados.length})</div><div class="lista">`;
-      comprados.forEach(item => { html += renderItem(item); });
-      html += '</div>';
-    }
-    app.innerHTML = html;
   });
 
-  function renderItem(item) {
-    return `
-      <div class="item${item.comprado ? ' comprado' : ''}">
-        <div class="checkbox" onclick="toggleItem('${item.id}', ${item.comprado})">${item.comprado ? '✓' : ''}</div>
-        <div class="item-nome">${escapeHtml(item.nome)}</div>
-        <div class="qtd-ctrl">
-          <button class="qtd-btn" onclick="alterarQtd('${item.id}', -1, ${item.qtd || 1})">−</button>
-          <span class="qtd-num">${item.qtd || 1}x</span>
-          <button class="qtd-btn" onclick="alterarQtd('${item.id}', 1, ${item.qtd || 1})">+</button>
-        </div>
-        <button class="btn-del" onclick="removerItem('${item.id}')">✕</button>
-      </div>`;
-  }
+  document.getElementById('btnLimparTudo').addEventListener('click', function() {
+    listaRef.once('value', function(snap) {
+      if (!snap.exists()) { toast('A lista já está vazia'); return; }
+      if (!confirm('Limpar toda a lista?')) return;
+      listaRef.remove();
+      toast('Lista limpa!');
+    });
+  });
 </script>
 </body>
 </html>
